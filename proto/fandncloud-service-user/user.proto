@@ -7,10 +7,7 @@ import "google/protobuf/timestamp.proto";
 service UserService {
   rpc CreateUser(User) returns (UserResponse) {}
   rpc DeleteUser(User) returns (UserResponse) {}
-  rpc BlockUser(User) returns (UserResponse) {}
-  rpc UnBlockUser(User) returns (UserResponse) {}
   rpc UpdateUser(User) returns (UserResponse) {}
-
   rpc GetUserById(User) returns (UserResponse) {}
 
   rpc CreateRole(Role) returns (RoleResponse) {}
@@ -26,7 +23,6 @@ service UserService {
   rpc GetPermissionById(Role) returns (RoleResponse) {}
 
   rpc GetUserPermissions(User) returns (RoleResponse) {}
-
 
   rpc Auth(User) returns (TokenResponse) {}
   rpc Validate(AccessToken) returns (TokenResponse) {}

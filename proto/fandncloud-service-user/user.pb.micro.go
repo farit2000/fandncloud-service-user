@@ -43,15 +43,20 @@ func NewUserServiceEndpoints() []*api.Endpoint {
 // Client API for UserService service
 
 type UserService interface {
-	Create(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error)
-	Delete(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error)
-	Block(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error)
-	UnBlock(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error)
-	Update(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error)
-	GetById(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error)
-	GetAll(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	GetUserGroups(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	GetUserPermissions(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
+	CreateUser(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error)
+	DeleteUser(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error)
+	UpdateUser(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error)
+	GetUserById(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error)
+	CreateRole(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
+	DeleteRole(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
+	UpdateRole(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
+	GetRoleById(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
+	GetUserRoles(ctx context.Context, in *User, opts ...client.CallOption) (*RoleResponse, error)
+	CreatePermission(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
+	DeletePermission(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
+	UpdatePermission(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
+	GetPermissionById(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error)
+	GetUserPermissions(ctx context.Context, in *User, opts ...client.CallOption) (*RoleResponse, error)
 	Auth(ctx context.Context, in *User, opts ...client.CallOption) (*TokenResponse, error)
 	Validate(ctx context.Context, in *AccessToken, opts ...client.CallOption) (*TokenResponse, error)
 	Refresh(ctx context.Context, in *RefreshToken, opts ...client.CallOption) (*TokenResponse, error)
@@ -69,9 +74,9 @@ func NewUserService(name string, c client.Client) UserService {
 	}
 }
 
-func (c *userService) Create(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "UserService.Create", in)
-	out := new(Response)
+func (c *userService) CreateUser(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.CreateUser", in)
+	out := new(UserResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -79,9 +84,9 @@ func (c *userService) Create(ctx context.Context, in *User, opts ...client.CallO
 	return out, nil
 }
 
-func (c *userService) Delete(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "UserService.Delete", in)
-	out := new(Response)
+func (c *userService) DeleteUser(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.DeleteUser", in)
+	out := new(UserResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -89,9 +94,9 @@ func (c *userService) Delete(ctx context.Context, in *User, opts ...client.CallO
 	return out, nil
 }
 
-func (c *userService) Block(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "UserService.Block", in)
-	out := new(Response)
+func (c *userService) UpdateUser(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.UpdateUser", in)
+	out := new(UserResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -99,9 +104,9 @@ func (c *userService) Block(ctx context.Context, in *User, opts ...client.CallOp
 	return out, nil
 }
 
-func (c *userService) UnBlock(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "UserService.UnBlock", in)
-	out := new(Response)
+func (c *userService) GetUserById(ctx context.Context, in *User, opts ...client.CallOption) (*UserResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.GetUserById", in)
+	out := new(UserResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -109,9 +114,9 @@ func (c *userService) UnBlock(ctx context.Context, in *User, opts ...client.Call
 	return out, nil
 }
 
-func (c *userService) Update(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "UserService.Update", in)
-	out := new(Response)
+func (c *userService) CreateRole(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.CreateRole", in)
+	out := new(RoleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -119,9 +124,9 @@ func (c *userService) Update(ctx context.Context, in *User, opts ...client.CallO
 	return out, nil
 }
 
-func (c *userService) GetById(ctx context.Context, in *User, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "UserService.GetById", in)
-	out := new(Response)
+func (c *userService) DeleteRole(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.DeleteRole", in)
+	out := new(RoleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -129,9 +134,9 @@ func (c *userService) GetById(ctx context.Context, in *User, opts ...client.Call
 	return out, nil
 }
 
-func (c *userService) GetAll(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "UserService.GetAll", in)
-	out := new(Response)
+func (c *userService) UpdateRole(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.UpdateRole", in)
+	out := new(RoleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -139,9 +144,9 @@ func (c *userService) GetAll(ctx context.Context, in *Request, opts ...client.Ca
 	return out, nil
 }
 
-func (c *userService) GetUserGroups(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "UserService.GetUserGroups", in)
-	out := new(Response)
+func (c *userService) GetRoleById(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.GetRoleById", in)
+	out := new(RoleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -149,9 +154,59 @@ func (c *userService) GetUserGroups(ctx context.Context, in *Request, opts ...cl
 	return out, nil
 }
 
-func (c *userService) GetUserPermissions(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
+func (c *userService) GetUserRoles(ctx context.Context, in *User, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.GetUserRoles", in)
+	out := new(RoleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userService) CreatePermission(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.CreatePermission", in)
+	out := new(RoleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userService) DeletePermission(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.DeletePermission", in)
+	out := new(RoleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userService) UpdatePermission(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.UpdatePermission", in)
+	out := new(RoleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userService) GetPermissionById(ctx context.Context, in *Role, opts ...client.CallOption) (*RoleResponse, error) {
+	req := c.c.NewRequest(c.name, "UserService.GetPermissionById", in)
+	out := new(RoleResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userService) GetUserPermissions(ctx context.Context, in *User, opts ...client.CallOption) (*RoleResponse, error) {
 	req := c.c.NewRequest(c.name, "UserService.GetUserPermissions", in)
-	out := new(Response)
+	out := new(RoleResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -192,15 +247,20 @@ func (c *userService) Refresh(ctx context.Context, in *RefreshToken, opts ...cli
 // Server API for UserService service
 
 type UserServiceHandler interface {
-	Create(context.Context, *User, *Response) error
-	Delete(context.Context, *User, *Response) error
-	Block(context.Context, *User, *Response) error
-	UnBlock(context.Context, *User, *Response) error
-	Update(context.Context, *User, *Response) error
-	GetById(context.Context, *User, *Response) error
-	GetAll(context.Context, *Request, *Response) error
-	GetUserGroups(context.Context, *Request, *Response) error
-	GetUserPermissions(context.Context, *Request, *Response) error
+	CreateUser(context.Context, *User, *UserResponse) error
+	DeleteUser(context.Context, *User, *UserResponse) error
+	UpdateUser(context.Context, *User, *UserResponse) error
+	GetUserById(context.Context, *User, *UserResponse) error
+	CreateRole(context.Context, *Role, *RoleResponse) error
+	DeleteRole(context.Context, *Role, *RoleResponse) error
+	UpdateRole(context.Context, *Role, *RoleResponse) error
+	GetRoleById(context.Context, *Role, *RoleResponse) error
+	GetUserRoles(context.Context, *User, *RoleResponse) error
+	CreatePermission(context.Context, *Role, *RoleResponse) error
+	DeletePermission(context.Context, *Role, *RoleResponse) error
+	UpdatePermission(context.Context, *Role, *RoleResponse) error
+	GetPermissionById(context.Context, *Role, *RoleResponse) error
+	GetUserPermissions(context.Context, *User, *RoleResponse) error
 	Auth(context.Context, *User, *TokenResponse) error
 	Validate(context.Context, *AccessToken, *TokenResponse) error
 	Refresh(context.Context, *RefreshToken, *TokenResponse) error
@@ -208,15 +268,20 @@ type UserServiceHandler interface {
 
 func RegisterUserServiceHandler(s server.Server, hdlr UserServiceHandler, opts ...server.HandlerOption) error {
 	type userService interface {
-		Create(ctx context.Context, in *User, out *Response) error
-		Delete(ctx context.Context, in *User, out *Response) error
-		Block(ctx context.Context, in *User, out *Response) error
-		UnBlock(ctx context.Context, in *User, out *Response) error
-		Update(ctx context.Context, in *User, out *Response) error
-		GetById(ctx context.Context, in *User, out *Response) error
-		GetAll(ctx context.Context, in *Request, out *Response) error
-		GetUserGroups(ctx context.Context, in *Request, out *Response) error
-		GetUserPermissions(ctx context.Context, in *Request, out *Response) error
+		CreateUser(ctx context.Context, in *User, out *UserResponse) error
+		DeleteUser(ctx context.Context, in *User, out *UserResponse) error
+		UpdateUser(ctx context.Context, in *User, out *UserResponse) error
+		GetUserById(ctx context.Context, in *User, out *UserResponse) error
+		CreateRole(ctx context.Context, in *Role, out *RoleResponse) error
+		DeleteRole(ctx context.Context, in *Role, out *RoleResponse) error
+		UpdateRole(ctx context.Context, in *Role, out *RoleResponse) error
+		GetRoleById(ctx context.Context, in *Role, out *RoleResponse) error
+		GetUserRoles(ctx context.Context, in *User, out *RoleResponse) error
+		CreatePermission(ctx context.Context, in *Role, out *RoleResponse) error
+		DeletePermission(ctx context.Context, in *Role, out *RoleResponse) error
+		UpdatePermission(ctx context.Context, in *Role, out *RoleResponse) error
+		GetPermissionById(ctx context.Context, in *Role, out *RoleResponse) error
+		GetUserPermissions(ctx context.Context, in *User, out *RoleResponse) error
 		Auth(ctx context.Context, in *User, out *TokenResponse) error
 		Validate(ctx context.Context, in *AccessToken, out *TokenResponse) error
 		Refresh(ctx context.Context, in *RefreshToken, out *TokenResponse) error
@@ -232,39 +297,59 @@ type userServiceHandler struct {
 	UserServiceHandler
 }
 
-func (h *userServiceHandler) Create(ctx context.Context, in *User, out *Response) error {
-	return h.UserServiceHandler.Create(ctx, in, out)
+func (h *userServiceHandler) CreateUser(ctx context.Context, in *User, out *UserResponse) error {
+	return h.UserServiceHandler.CreateUser(ctx, in, out)
 }
 
-func (h *userServiceHandler) Delete(ctx context.Context, in *User, out *Response) error {
-	return h.UserServiceHandler.Delete(ctx, in, out)
+func (h *userServiceHandler) DeleteUser(ctx context.Context, in *User, out *UserResponse) error {
+	return h.UserServiceHandler.DeleteUser(ctx, in, out)
 }
 
-func (h *userServiceHandler) Block(ctx context.Context, in *User, out *Response) error {
-	return h.UserServiceHandler.Block(ctx, in, out)
+func (h *userServiceHandler) UpdateUser(ctx context.Context, in *User, out *UserResponse) error {
+	return h.UserServiceHandler.UpdateUser(ctx, in, out)
 }
 
-func (h *userServiceHandler) UnBlock(ctx context.Context, in *User, out *Response) error {
-	return h.UserServiceHandler.UnBlock(ctx, in, out)
+func (h *userServiceHandler) GetUserById(ctx context.Context, in *User, out *UserResponse) error {
+	return h.UserServiceHandler.GetUserById(ctx, in, out)
 }
 
-func (h *userServiceHandler) Update(ctx context.Context, in *User, out *Response) error {
-	return h.UserServiceHandler.Update(ctx, in, out)
+func (h *userServiceHandler) CreateRole(ctx context.Context, in *Role, out *RoleResponse) error {
+	return h.UserServiceHandler.CreateRole(ctx, in, out)
 }
 
-func (h *userServiceHandler) GetById(ctx context.Context, in *User, out *Response) error {
-	return h.UserServiceHandler.GetById(ctx, in, out)
+func (h *userServiceHandler) DeleteRole(ctx context.Context, in *Role, out *RoleResponse) error {
+	return h.UserServiceHandler.DeleteRole(ctx, in, out)
 }
 
-func (h *userServiceHandler) GetAll(ctx context.Context, in *Request, out *Response) error {
-	return h.UserServiceHandler.GetAll(ctx, in, out)
+func (h *userServiceHandler) UpdateRole(ctx context.Context, in *Role, out *RoleResponse) error {
+	return h.UserServiceHandler.UpdateRole(ctx, in, out)
 }
 
-func (h *userServiceHandler) GetUserGroups(ctx context.Context, in *Request, out *Response) error {
-	return h.UserServiceHandler.GetUserGroups(ctx, in, out)
+func (h *userServiceHandler) GetRoleById(ctx context.Context, in *Role, out *RoleResponse) error {
+	return h.UserServiceHandler.GetRoleById(ctx, in, out)
 }
 
-func (h *userServiceHandler) GetUserPermissions(ctx context.Context, in *Request, out *Response) error {
+func (h *userServiceHandler) GetUserRoles(ctx context.Context, in *User, out *RoleResponse) error {
+	return h.UserServiceHandler.GetUserRoles(ctx, in, out)
+}
+
+func (h *userServiceHandler) CreatePermission(ctx context.Context, in *Role, out *RoleResponse) error {
+	return h.UserServiceHandler.CreatePermission(ctx, in, out)
+}
+
+func (h *userServiceHandler) DeletePermission(ctx context.Context, in *Role, out *RoleResponse) error {
+	return h.UserServiceHandler.DeletePermission(ctx, in, out)
+}
+
+func (h *userServiceHandler) UpdatePermission(ctx context.Context, in *Role, out *RoleResponse) error {
+	return h.UserServiceHandler.UpdatePermission(ctx, in, out)
+}
+
+func (h *userServiceHandler) GetPermissionById(ctx context.Context, in *Role, out *RoleResponse) error {
+	return h.UserServiceHandler.GetPermissionById(ctx, in, out)
+}
+
+func (h *userServiceHandler) GetUserPermissions(ctx context.Context, in *User, out *RoleResponse) error {
 	return h.UserServiceHandler.GetUserPermissions(ctx, in, out)
 }
 

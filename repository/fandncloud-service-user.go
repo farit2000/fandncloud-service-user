@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	pb "github.com/farit2000/FandNCloud/fandncloud-service-user/proto/fandncloud-service-user"
+	pb "github.com/farit2000/fandncloud-service-user/proto/fandncloud-service-user"
 	"github.com/jackc/pgx"
 )
 
