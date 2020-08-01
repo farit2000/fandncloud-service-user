@@ -1,0 +1,129 @@
+syntax = "proto3";
+
+package user;
+
+import "google/protobuf/timestamp.proto";
+
+service UserService {
+  rpc CreateUser(User) returns (UserResponse) {}
+  rpc DeleteUser(User) returns (UserResponse) {}
+  rpc BlockUser(User) returns (UserResponse) {}
+  rpc UnBlockUser(User) returns (UserResponse) {}
+  rpc UpdateUser(User) returns (UserResponse) {}
+
+  rpc GetUserById(User) returns (UserResponse) {}
+
+  rpc CreateRole(Role) returns (RoleResponse) {}
+  rpc DeleteRole(Role) returns (RoleResponse) {}
+  rpc UpdateRole(Role) returns (RoleResponse) {}
+  rpc GetRoleById(Role) returns (RoleResponse) {}
+
+  rpc GetUserRoles(User) returns (RoleResponse) {}
+
+  rpc CreatePermission(Role) returns (RoleResponse) {}
+  rpc DeletePermission(Role) returns (RoleResponse) {}
+  rpc UpdatePermission(Role) returns (RoleResponse) {}
+  rpc GetPermissionById(Role) returns (RoleResponse) {}
+
+  rpc GetUserPermissions(User) returns (RoleResponse) {}
+
+
+  rpc Auth(User) returns (TokenResponse) {}
+  rpc Validate(AccessToken) returns (TokenResponse) {}
+  rpc Refresh(RefreshToken) returns (TokenResponse) {}
+}
+
+message User {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string phone = 5;
+  string password = 6;
+  bool is_staff = 7;
+  bool is_blocked = 8;
+  bool is_deleted = 9;
+  google.protobuf.Timestamp created_at = 10;
+}
+
+message Session {
+  int64 id = 1;
+  string refresh_token = 2;
+  string user_agent = 3;
+  string fingerprint = 4;
+  string ip = 5;
+  int64 expires_in = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message Log {
+  google.protobuf.Timestamp action_time = 1;
+  string object_id = 2;
+  string change_message = 3;
+}
+
+message Group {
+  string id = 1;
+  string Name = 2;
+}
+
+message Role {
+  int64 id = 1;
+  string name = 2;
+}
+
+message ContentType {
+  int64 id = 1;
+  string name = 2;
+}
+
+message Permission {
+  int64 id = 1;
+  string name = 2;
+  string codename = 3;
+}
+
+message AccessToken {
+  string token = 1;
+  bool valid = 2;
+  repeated Error errors = 3;
+}
+
+message RefreshToken {
+  string token = 1;
+  bool valid = 2;
+  repeated Error errors = 3;
+}
+
+message Error {
+  int32 code = 1;
+  string description = 2;
+}
+
+message Request {}
+
+message UserResponse {
+  User user = 1;
+  repeated User users = 2;
+  repeated Error errors = 3;
+}
+
+message TokenResponse {
+  User user = 1;
+  AccessToken access_token = 2;
+  RefreshToken refresh_token = 3;
+}
+
+message RoleResponse {
+  Role role = 1;
+  User user = 2;
+  repeated Error errors = 3;
+  repeated Role roles = 4;
+}
+
+message PermissionResponse {
+  Permission permission = 1;
+  User user = 2;
+  repeated Error errors = 3;
+  repeated Permission permissions = 4;
+}
