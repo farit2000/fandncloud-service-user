@@ -1,0 +1,31 @@
+-- Create user command
+INSERT INTO users (role_id, first_name, last_name, email, phone, password, is_staff, is_blocked, is_deleted)
+    VALUES (1, 'Test', 'Test', 'test@ya.ru', '+79784756349', '12345', true, false, false) RETURNING id;
+
+-- Create role command
+INSERT INTO roles (name)
+    VALUES ('admin') RETURNING id;
+
+-- Create group
+INSERT INTO groups (name)
+    VALUES ('test') RETURNING id;
+
+-- Create user group
+INSERT INTO user_groups (user_id, group_id)
+    VALUES ('3d8ac52b-794b-4e0c-8e23-b81b6e48b6a8', '')
+
+-- Create content type
+INSERT INTO content_types (content)
+    VALUES ('test') RETURNING id;
+
+-- Create permission type
+INSERT INTO permission_types (name, codename)
+    VALUES ('read', 'READ');
+
+-- Create permission
+INSERT INTO permissions (content_type_id, permission_type_id)
+    VALUES (1, 1);
+
+-- Create AUTH Type
+INSERT INTO auth_types (name)
+    VALUES ('login/password');

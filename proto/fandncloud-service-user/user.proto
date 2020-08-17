@@ -9,11 +9,13 @@ service UserService {
   rpc DeleteUser(User) returns (UserResponse) {}
   rpc UpdateUser(User) returns (UserResponse) {}
   rpc GetUserById(User) returns (UserResponse) {}
+  rpc GetAllUsers(Request) returns (UserResponse) {}
 
   rpc CreateRole(Role) returns (RoleResponse) {}
   rpc DeleteRole(Role) returns (RoleResponse) {}
   rpc UpdateRole(Role) returns (RoleResponse) {}
   rpc GetRoleById(Role) returns (RoleResponse) {}
+  rpc GetAllRoles(Request) returns (RoleResponse) {}
 
   rpc GetUserRoles(User) returns (RoleResponse) {}
 
@@ -21,12 +23,14 @@ service UserService {
   rpc DeletePermission(Role) returns (RoleResponse) {}
   rpc UpdatePermission(Role) returns (RoleResponse) {}
   rpc GetPermissionById(Role) returns (RoleResponse) {}
+  rpc GetAllPermissions(Request) returns (RoleResponse) {}
 
   rpc GetUserPermissions(User) returns (RoleResponse) {}
 
   rpc Auth(User) returns (TokenResponse) {}
   rpc Validate(AccessToken) returns (TokenResponse) {}
   rpc Refresh(RefreshToken) returns (TokenResponse) {}
+  rpc AccessCheck(AccessCheckRequet) returns (AccessCheckResponse) {}
 }
 
 message User {
@@ -97,6 +101,18 @@ message Error {
 }
 
 message Request {}
+
+message UserRequest {
+  User user = 1;
+  Role role
+  repeated User users = 2;
+  repeated Error errors = 3;
+}
+
+message AccessCheckRequest {
+  User user = 1;
+  string 
+}
 
 message UserResponse {
   User user = 1;
